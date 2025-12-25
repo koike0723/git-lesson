@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* カスタムプロパティ(css変数) */
-:root{
+:root {
     /* --カスタムプロパティ名:値 */
     --portfolio-black: #000000;
     --portfolio-white: #ffffff;
@@ -9,16 +9,129 @@
     --portfolio-light-green: #2FAC9E;
     --portfolio-gray: #EEEEEE;
 
-    --fz-12:12px;
-    --fz-14:14px;
-    --fz-18:18px;
-    --fz-24:24px;
-    --fz-32:32px;
-    --fz-48:48px;
-    --fz-64:64px;
+    --fz-12: 12px;
+    --fz-14: 14px;
+    --fz-18: 18px;
+    --fz-24: 24px;
+    --fz-32: 32px;
+    --fz-48: 48px;
+    --fz-64: 64px;
 }
 
-body{
+body {
     /* カスタムプロパティの利用: var(カスタムプロパティ名) */
     background-color: var(--portfolio-light-green);
+}
+
+/* 何番目系疑似クラス */
+/* 
+1.child系(子供の中で何番目か)
+:first-child
+:last-child
+:nth-child(n)
+
+2.of-type系(タグの種類の中で何番目か)
+:first-of-type
+:last-of-type
+:nth-of-type()
+
+- 偶数番目: even | 2n
+- 奇数番目: odd | 2n+1
+- ●番目以降: n + ●
+*/
+
+/* of-typeを使ってpara1の文字のgreenにしてください */
+
+.sec01>p:first-of-type {
+    color: var(--portfolio-green);
+}
+
+/* childを使ってpara1に下線を引いてください */
+.sec01>p:nth-child(2) {
+    text-decoration: underline solid #000000 1px;
+}
+
+/* li-2とli-5を太字にしてください */
+.sec01 li:nth-child(2) {
+    font-weight: bold;
+}
+
+/* li-5の文字サイズを24pxにしてください */
+.sec01 ul:nth-child(4) li:nth-child(2) {
+    font-size: 24px;
+}
+
+/* formのスタイルをリセット */
+input[type="text"],
+input[type="email"],
+textarea {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    appearance: none;
+}
+
+/* お名前とメールアドレスとメッセージの入力欄に太さ1px、実線、黒色のボーダーを引く */
+/* input[type="text"],
+input[type="email"],
+textarea {
+    border: solid var(--portfolio-black) 1px;
+    background-color: var(--portfolio-white);
+} */
+
+input:is([type="text"], [type="email"]),
+textarea {
+    border: solid var(--portfolio-black) 1px;
+    background-color: var(--portfolio-white);
+}
+
+/* フォーカスされている入力欄を強調 */
+input:focus,
+textarea:focus {
+    outline: solid var(--portfolio-green) 3px;
+}
+
+/* 必須項目のスタイルを変更する */
+input:required {
+    background-color: pink;
+}
+
+/* 疑似要素 :has() */
+label:has(input:required) span::after{
+    content: "必須";
+    font-size: 0.8em;
+    display: inline-block;
+    background: var(--portfolio-green);
+    color: var(--portfolio-white);
+    border-radius: 3px;
+    /* 
+    横:inline
+    - 右:-start
+    - 左:-end
+
+    縦:block
+    - 上:-start
+    - 下:-end
+     */
+    /* padding 3px 6px;と同じ */
+    padding-inline: 6px;
+    padding-block: 3px;
+    /* margin-left: 5px;と同じ */
+    margin-inline-start: 5px;
+}
+
+input[type="submit"]{
+    border-radius: 8px;
+    background: var(--portfolio-green);
+    color: var(--portfolio-white);
+    padding-inline: 13px;
+    padding-block: 8px;
+}
+
+input[type="submit"]:disabled{
+    background: var(--portfolio-gray);
+    color: var(--portfolio-black);
+    border: 1px solid --portfolio-black;
+    opacity: 0.5;
 }
